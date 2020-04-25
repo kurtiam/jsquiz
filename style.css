@@ -1,0 +1,45 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+.startquiz {
+  /* background-image:
+     linear-gradient(180deg, white 3rem, #F0A4A4 calc(3rem), #F0A4A4 calc(3rem + 2px), transparent 1px),
+     repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));   */
+
+  box-shadow: 1px 1px 3px rgba(0,0,0,.25);
+  height: 16rem;
+  width: 400px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center
+  
+} 
+
+.btn-group button {
+  background-color: #ffa500;   opacity: .9;/* Green background */
+  border-radius: 30px;
+  border: 1px solid white;  /*Green border */
+  color: black;  /* White text */
+  padding: 5px 25px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 50%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+  margin: auto;
+  text-align: center;
+  outline:none;
+
+   
+} 
+
+.btn-group button:not(:last-child) {
+ border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color:yellow;
+}
+
+.center { text-align: center }
