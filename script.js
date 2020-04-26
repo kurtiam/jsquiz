@@ -1,8 +1,38 @@
-function save() {
-    var player = document.getElementById("userName").value;
-    localStorage.setItem("Player", player);
 
+function getIt() {
+    // Get form, item, and wishlist
+    var addToWishList = document.querySelector('#userName');
+    var wishlistItem = document.querySelector('#userName');
+    var wishlist = document.querySelector('#result');
+
+    addToWishList.addEventListener('change', function (event) {
+
+        // Don't submit the form
+        event.preventDefault();
+
+        // Ignore it if the wishlist item is empty
+        if (wishlistItem.value.length < 1) return;
+
+        // Add item to wishlist
+        wishlist.innerHTML += '<li>' + wishlistItem.value + '</li>';
+
+        // Clear input
+        wishlistItem.value = '';
+
+        // Save the list to localStorage
+        localStorage.setItem('wishlistItems', wishlist.innerHTML);
+
+    }, false);
+
+    // Check for saved wishlist items
+    var saved = localStorage.getItem('wishlistItems');
+
+    // If there are any saved items, update our list
+    if (saved) {
+        wishlist.innerHTML = saved;
+    }
 }
+
 
 function ask(text, choices, answer) {
     this.text = text;
@@ -28,7 +58,7 @@ test.prototype.guess = function (answer) {
     if (this.askIndex().correct(answer)) {
         this.score++;
         var response = document.getElementById("response");
-        response.innerHTML = "<p> Correct </p>"
+        response.innerHTML = "<p style='color:green;'> Correct </p>"
         var x = document.getElementById("response");
         setTimeout(function () { x.innerHTML = "" }, 1000);
 
@@ -37,24 +67,9 @@ test.prototype.guess = function (answer) {
     else {
 
         var response = document.getElementById("response");
-        response.innerHTML = "<br> Not Correct";
+        response.innerHTML = "<p style='color:red;'> Incorrect </p>";
         var x = document.getElementById("response");
         setTimeout(function () { x.innerHTML = "" }, 1000);
-        // var timeLeft = document.querySelector('#countdown');
-        // var newTime = (timeLeft.innerHTML - 10);
-        // console.log(newTime)
-
-        // newGo(3, 0)
-
-        // function newGo(m, s) {
-        //     document.getElementById("countdown").innerHTML = "0"
-        //     document.getElementById("countdown").innerHTML = m + ":" + s;
-        //     s == 0 ? (m == 0 ? highScore() : (m--, s = 60, t())) : (s--, t1());
-        //     function t1() { setTimeout(function () { newGo(m, s) }, 1000) };
-        // }
-
-
-
 
     }
 
@@ -113,16 +128,51 @@ function guess(id, guess) {
 };
 
 function results() {
-    highScore()
+    var listHtml = "<div id='result'> </div>"
+    var overHtml = "<h1> Quiz Over</h1>";
+    oelemenemt = document.getElementById("quiz");
+    oelemenemt.innerHTML = overHtml + "You got " + quiz.score + " out of " + quiz.questions.length
+    overHtml += "<h3> <input type='text' name='userName' id='userName' placeholder='Enter Name' /> </h3>"
+    oelemenemt.innerHTML = overHtml + "You got " + quiz.score + " out of " + quiz.questions.length + "<h3>Latest Scores</h3>" + listHtml
+
+
+
+    var input = document.querySelector('#userName');
+    var listItem = document.querySelector('#userName');
+    var list = document.querySelector('#result');
+
+    input.addEventListener('change', updateValue);
+    function updateValue(event) {
+
+        if (listItem.value.length < 1) return;
+
+
+        list.innerHTML += '<p>' + listItem.value + "  -----------  " + quiz.score + '</p>';
+
+        // Clear input
+        listItem.value = '';
+
+        // Save the list to localStorage
+        localStorage.setItem('Players', list.innerHTML);
+
+    };
+
+    // Check for saved list items
+    var saved = localStorage.getItem('Players');
+
+    // If there are any saved items, update our list
+    if (saved) {
+        list.innerHTML = saved;
+    }
+
+
 
 };
 
 function highScore() {
 
-    var hScore = "<br><h1>High Scores</h1>";
-
-    helemenemt = document.getElementById("quiz");
-    helemenemt.innerHTML = hScore + "<br>" + localStorage.getItem("Player") + " :   " + quiz.score + " out of " + quiz.questions.length
+    // helemenemt = document.getElementById("quiz");
+    // helemenemt.innerHTML = hScore + "<br>" + localStorage.getItem("Player") + " :   " + quiz.score + " out of " + quiz.questions.length
 
 }
 
@@ -139,11 +189,5 @@ var questions = [
 var quiz = new test(questions);
 
 
-function go(mm, ss) {
-    document.getElementById("countdown").innerHTML = mm + ":" + ss;
-    ss == 00 ? (mm == 00 ? highScore() : (mm--, ss = 60, t())) : (ss--, t());
-    function t() { setTimeout(function () { go(mm, ss) }, 1000) };
-
-}
 
 

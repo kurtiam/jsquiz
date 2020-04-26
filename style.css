@@ -7,8 +7,8 @@ html, body { height: 100%; }
      repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));   */
 
   box-shadow: 1px 1px 3px rgba(0,0,0,.25);
-  height: 16rem;
-  width: 400px;
+  height: 20rem;
+  width: 500px;
   margin: auto;
   position: relative;
   top: 50%;
@@ -43,3 +43,93 @@ html, body { height: 100%; }
 }
 
 .center { text-align: center }
+
+body {
+  font-family: sans-serif;
+  display: grid;
+  height: 50vh;
+    place-items: center;
+}
+
+/* timer stuffs */
+
+.base-timer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+/*  */
+.base-timer2 {
+  height: 50px;
+  width: 70px;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/*  */
+.base-timer__square {
+  fill: none;
+  stroke: none;
+}
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+/*  */
+.base-timer__path-remaining2 {
+  stroke-width: 7px;
+  stroke-linecap: square;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
