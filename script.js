@@ -1,39 +1,4 @@
 
-function getIt() {
-    // Get form, item, and wishlist
-    var addToWishList = document.querySelector('#userName');
-    var wishlistItem = document.querySelector('#userName');
-    var wishlist = document.querySelector('#result');
-
-    addToWishList.addEventListener('change', function (event) {
-
-        // Don't submit the form
-        event.preventDefault();
-
-        // Ignore it if the wishlist item is empty
-        if (wishlistItem.value.length < 1) return;
-
-        // Add item to wishlist
-        wishlist.innerHTML += '<li>' + wishlistItem.value + '</li>';
-
-        // Clear input
-        wishlistItem.value = '';
-
-        // Save the list to localStorage
-        localStorage.setItem('wishlistItems', wishlist.innerHTML);
-
-    }, false);
-
-    // Check for saved wishlist items
-    var saved = localStorage.getItem('wishlistItems');
-
-    // If there are any saved items, update our list
-    if (saved) {
-        wishlist.innerHTML = saved;
-    }
-}
-
-
 function ask(text, choices, answer) {
     this.text = text;
     this.choices = choices;
@@ -60,6 +25,7 @@ test.prototype.guess = function (answer) {
         var response = document.getElementById("response");
         response.innerHTML = "<p style='color:green;'> Correct </p>"
         var x = document.getElementById("response");
+        // timeReset()
         setTimeout(function () { x.innerHTML = "" }, 1000);
 
     }
@@ -69,6 +35,7 @@ test.prototype.guess = function (answer) {
         var response = document.getElementById("response");
         response.innerHTML = "<p style='color:red;'> Incorrect </p>";
         var x = document.getElementById("response");
+        go();
         setTimeout(function () { x.innerHTML = "" }, 1000);
 
     }
@@ -136,7 +103,6 @@ function results() {
     oelemenemt.innerHTML = overHtml + "You got " + quiz.score + " out of " + quiz.questions.length + "<h3>Latest Scores</h3>" + listHtml
 
 
-
     var input = document.querySelector('#userName');
     var listItem = document.querySelector('#userName');
     var list = document.querySelector('#result');
@@ -167,11 +133,11 @@ function results() {
     }
 
 
-
 };
 
 function highScore() {
 
+    // moved to results function
     // helemenemt = document.getElementById("quiz");
     // helemenemt.innerHTML = hScore + "<br>" + localStorage.getItem("Player") + " :   " + quiz.score + " out of " + quiz.questions.length
 
