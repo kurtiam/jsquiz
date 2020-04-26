@@ -35,7 +35,7 @@ test.prototype.guess = function (answer) {
         var response = document.getElementById("response");
         response.innerHTML = "<p style='color:red;'> Incorrect </p>";
         var x = document.getElementById("response");
-        go();
+      //  go();
         setTimeout(function () { x.innerHTML = "" }, 1000);
 
     }
