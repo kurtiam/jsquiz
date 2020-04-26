@@ -128,11 +128,11 @@ function guess(id, guess) {
 };
 
 function results() {
-    var listHtml = "<div id='result'> </div>"
+    var listHtml = "<div id='result' class='wrapper'> </div>"
     var overHtml = "<h1> Quiz Over</h1>";
     oelemenemt = document.getElementById("quiz");
     oelemenemt.innerHTML = overHtml + "You got " + quiz.score + " out of " + quiz.questions.length
-    overHtml += "<h3> <input type='text' name='userName' id='userName' placeholder='Enter Name' /> </h3>"
+    overHtml += "<h3> <input type='text' name='userName' id='userName' placeholder='Type Name and press Enter to Submit' /> </h3>"
     oelemenemt.innerHTML = overHtml + "You got " + quiz.score + " out of " + quiz.questions.length + "<h3>Latest Scores</h3>" + listHtml
 
 
@@ -147,7 +147,8 @@ function results() {
         if (listItem.value.length < 1) return;
 
 
-        list.innerHTML += '<p>' + listItem.value + "  -----------  " + quiz.score + '</p>';
+        list.innerHTML += '<li>' + listItem.value + "  ---------  " + quiz.score + '</li>';
+
 
         // Clear input
         listItem.value = '';
