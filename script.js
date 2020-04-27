@@ -32,11 +32,13 @@ test.prototype.guess = function (answer) {
 
     else {
 
+
         var response = document.getElementById("response");
         response.innerHTML = "<p style='color:red;'> Incorrect </p>";
         var x = document.getElementById("response");
-        go();
         setTimeout(function () { x.innerHTML = "" }, 1000);
+        resetTimer();
+
 
     }
 

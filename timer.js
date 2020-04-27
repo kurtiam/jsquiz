@@ -11,11 +11,11 @@
 
 
 function go() {
-    var FULL_DASH_ARRAY = 283;
-    var WARNING_THRESHOLD = 10;
-    var ALERT_THRESHOLD = 5;
+    FULL_DASH_ARRAY = 283;
+    WARNING_THRESHOLD = 10;
+    ALERT_THRESHOLD = 5;
 
-    var COLOR_CODES = {
+    COLOR_CODES = {
         info: {
             color: "green"
         },
@@ -29,11 +29,11 @@ function go() {
         }
     };
 
-    var TIME_LIMIT = 180;
-    let timePassed = 0;
-    let timeLeft = TIME_LIMIT;
-    let timerInterval = null;
-    let remainingPathColor = COLOR_CODES.info.color;
+    TIME_LIMIT = 180;
+    timePassed = 0;
+    timeLeft = TIME_LIMIT;
+    timerInterval = null;
+    remainingPathColor = COLOR_CODES.info.color;
 
     document.getElementById("timer").innerHTML = `
 <div class="base-timer2">
@@ -58,72 +58,98 @@ function go() {
     )}</span>
 </div>
 `;
-
     startTimer();
 
-    function onTimesUp() {
-        clearInterval(timerInterval);
-    }
 
-    function startTimer() {
-        timerInterval = setInterval(() => {
-            timePassed = timePassed += 1;
-            timeLeft = TIME_LIMIT - timePassed;
-            document.getElementById("base-timer-label").innerHTML = formatTime(
-                timeLeft
-            );
-            setCircleDasharray();
-            setRemainingPathColor(timeLeft);
+};
 
-            if (timeLeft === 0 || quiz.questionIndex === quiz.questions.length) {
-                onTimesUp();
-                results();
-            }
-        }, 1000);
-    }
+function onTimesUp() {
+    clearInterval(timerInterval);
+}
 
-    function formatTime(time) {
-        var minutes = Math.floor(time / 60);
-        let seconds = time % 60;
+// function takeAway() {
+//     clearInterval(timerInterval - 60);
+// }
+function startTimer() {
+    timerInterval = setInterval(() => {
+        timePassed = timePassed += 1;
+        timeLeft = TIME_LIMIT - timePassed;
+        document.getElementById("base-timer-label").innerHTML = formatTime(
+            timeLeft
+        );
 
-        if (seconds < 10) {
-            seconds = `0${seconds}`;
+        console.log
+        setCircleDasharray();
+        setRemainingPathColor(timeLeft);
+
+        if (timeLeft === 0 || quiz.questionIndex === quiz.questions.length) {
+            onTimesUp();
+            results();
         }
+    }, 1000);
+};
 
-        return `${minutes}:${seconds}`;
-    }
 
-    function setRemainingPathColor(timeLeft) {
-        var { alert, warning, info } = COLOR_CODES;
-        if (timeLeft <= alert.threshold) {
-            document
-                .getElementById("base-timer-path-remaining")
-                .classList.remove(warning.color);
-            document
-                .getElementById("base-timer-path-remaining")
-                .classList.add(alert.color);
-        } else if (timeLeft <= warning.threshold) {
-            document
-                .getElementById("base-timer-path-remaining")
-                .classList.remove(info.color);
-            document
-                .getElementById("base-timer-path-remaining")
-                .classList.add(warning.color);
+function resetTimer() {
+    onTimesUp();
+    timerInterval = setInterval(() => {
+        timePassed = timePassed += 1;
+        timeLeft = TIME_LIMIT - timePassed - 30;
+        document.getElementById("base-timer-label").innerHTML = formatTime(
+            timeLeft
+        );
+        setCircleDasharray();
+        setRemainingPathColor(timeLeft);
+
+        if (timeLeft === 0 || quiz.questionIndex === quiz.questions.length) {
+            onTimesUp();
+            results();
         }
+    }, 1000);
 
+}
+
+function formatTime(time) {
+    var minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    if (seconds < 10) {
+        seconds = `0${seconds}`;
     }
 
-    function calculateTimeFraction() {
-        var rawTimeFraction = timeLeft / TIME_LIMIT;
-        return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
-    }
+    return `${minutes}:${seconds}`;
+}
 
-    function setCircleDasharray() {
-        var circleDasharray = `${(
-            calculateTimeFraction() * FULL_DASH_ARRAY
-        ).toFixed(0)} 283`;
+function setRemainingPathColor(timeLeft) {
+    var { alert, warning, info } = COLOR_CODES;
+    if (timeLeft <= alert.threshold) {
         document
             .getElementById("base-timer-path-remaining")
-            .setAttribute("stroke-dasharray", circleDasharray);
+            .classList.remove(warning.color);
+        document
+            .getElementById("base-timer-path-remaining")
+            .classList.add(alert.color);
+    } else if (timeLeft <= warning.threshold) {
+        document
+            .getElementById("base-timer-path-remaining")
+            .classList.remove(info.color);
+        document
+            .getElementById("base-timer-path-remaining")
+            .classList.add(warning.color);
     }
+
+}
+
+function calculateTimeFraction() {
+    var rawTimeFraction = timeLeft / TIME_LIMIT;
+    return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+
+function setCircleDasharray() {
+    var circleDasharray = `${(
+        calculateTimeFraction() * FULL_DASH_ARRAY
+    ).toFixed(0)} 283`;
+    document
+        .getElementById("base-timer-path-remaining")
+        .setAttribute("stroke-dasharray", circleDasharray);
 }
