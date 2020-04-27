@@ -1,4 +1,3 @@
-
 function ask(text, choices, answer) {
     this.text = text;
     this.choices = choices;
