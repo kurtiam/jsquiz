@@ -36,10 +36,6 @@ test.prototype.guess = function (answer) {
         var response = document.getElementById("response");
         response.innerHTML = "<p style='color:red;'> Incorrect </p>";
         var x = document.getElementById("response");
-<<<<<<< HEAD
-=======
-       go();
->>>>>>> 3a151913166f4e751084bd38b44abf415de48d2c
         setTimeout(function () { x.innerHTML = "" }, 1000);
         resetTimer();
 
