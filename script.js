@@ -1,3 +1,5 @@
+// add functionality for questions choices 
+
 function ask(text, choices, answer) {
     this.text = text;
     this.choices = choices;
@@ -17,7 +19,7 @@ function test(questions) {
 test.prototype.askIndex = function () {
     return this.questions[this.questionIndex];
 }
-
+// if correct choice go to next and show Correct
 test.prototype.guess = function (answer) {
     if (this.askIndex().correct(answer)) {
         this.score++;
@@ -31,7 +33,7 @@ test.prototype.guess = function (answer) {
 
     else {
 
-
+// if incorrect choice reset timer go to next and show Incorrect
         var response = document.getElementById("response");
         response.innerHTML = "<p style='color:red;'> Incorrect </p>";
         var x = document.getElementById("response");
@@ -56,6 +58,7 @@ function verify() {
     else { makeIt() }
 }
 
+// function to fill in new questions and choices
 function makeIt() {
     if (quiz.finished()) {
         results();
@@ -94,7 +97,7 @@ function guess(id, guess) {
     }
 
 };
-
+// show sthe results of he quiz 
 function results() {
     var listHtml = "<div id='result' class='wrapper'> </div>"
     var overHtml = "<h1> Quiz Over</h1>";
